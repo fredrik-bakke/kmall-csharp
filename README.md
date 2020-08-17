@@ -1,5 +1,5 @@
 # kmall-csharp
-A class library for reading and writing Kongsberg .kmall files in C#.
+A C# class library for reading and writing Kongsberg .kmall files.
 
 
 **DISCLAIMER:**
