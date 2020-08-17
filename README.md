@@ -27,7 +27,7 @@ using (KmallReader r = new KmallReader(filePath))
 // All datagrams found in file are now stored in the datagrams-variable.
 ```
 
-#### Reading datagrams of specific type in a loop
+#### Reading datagrams of a specific type in a loop
 ```c#
 string filePath = @"C:\myKmallFiles\myKmallFile.kmall";
 string datagramType = KmallConstants.EM_DGM_M_RANGE_AND_DEPTH;
@@ -59,7 +59,7 @@ using (KmallWriter w = new KmallWriter(filePath, FileMode.Create))
 }
 ```
 
-#### Making a copy, modyfying datagrams of a specific type
+#### Making a copy, modifying datagrams of a specific type
 ```c#
 string readPath = @"C:\myKmallFiles\myKmallFile1.kmall";
 string writePath = @"C:\myKmallFiles\myKmallFile2.kmall";
