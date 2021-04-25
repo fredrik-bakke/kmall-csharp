@@ -1,10 +1,10 @@
 # kmall-csharp
-A WIP C# class library for reading and writing Kongsberg .kmall files.
+A work-in-progress C# class library for reading and writing Kongsberg .kmall files.
 
 
 **DISCLAIMER:**
 This library is largely untested. It has been used to read and write a handful of .kmall files, but with some errors.
-As of now there are a few identified issues. See [known issues](#known-issues).
+As of now there are a few identified issues.
 
 
 ### Example Usages
@@ -107,12 +107,3 @@ using (KmallWriter w = new KmallWriter(fs))
   }
 }
 ```
-
-### Known Issues
-- Doubles are (sometimes) read wrong. It is suspected that this has something to do with big- vs. little-endian encodings.
-- Doubles are sometimes written wrong as well, even though this shouldn't be a problem with endianness.
-- KMbinary datagrams are not read properly, but the implemented field order matches the format specification.
-- KMbinary datagrams are not writing properly. Some fields are disappearing.
-- The sec and nanosec fields are swapped in KMdelayedHeave, but the implemented field order matches the format specification.
-- EMdgmSPOdataBlock is not read correctly, but the implemented field order matches the format specification. E.g. ellipsoidHeightReRefPoint_m seems to be stored in courseOverGround_deg instead, while ellipsoidHeightReRefPoint_m is holding a nonsensical value.
-- DateTimes are truncated to milliseconds.
