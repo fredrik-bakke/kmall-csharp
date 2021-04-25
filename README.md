@@ -24,7 +24,7 @@ using (KmallReader r = new KmallReader(filePath))
 {
   datagrams = r.ReadAllDatagrams();
 }
-// All datagrams found in file are now stored in the datagrams-variable.
+// All datagrams found on file are now available in the datagrams-List.
 ```
 
 #### Reading datagrams of a specific type in a loop
