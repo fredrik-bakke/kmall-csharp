@@ -1,5 +1,5 @@
 # kmall-csharp
-A C# class library for reading and writing Kongsberg .kmall files.
+A WIP C# class library for reading and writing Kongsberg .kmall files.
 
 
 **DISCLAIMER:**
@@ -102,13 +102,14 @@ using (KmallWriter w = new KmallWriter(fs))
     
     //Writes the datagram at the same position as it was read.
     //This functionality is achieved by storing the datagram's file position in the EMdgm.DatagramPosition field.
+    //Note however that currently the datagram will overwrite parts of the next datagram if its length has increased.
     w.WriteDatagramAtDatagramPosition(dgm);
   }
 }
 ```
 
 ### Known Issues
-- Doubles are (sometimes) read wrong. I'm suspecting this has something to do with big- vs. little-endian encodings.
+- Doubles are (sometimes) read wrong. It is suspected that this has something to do with big- vs. little-endian encodings.
 - Doubles are sometimes written wrong as well, even though this shouldn't be a problem with endianness.
 - KMbinary datagrams are not read properly, but the implemented field order matches the format specification.
 - KMbinary datagrams are not writing properly. Some fields are disappearing.
