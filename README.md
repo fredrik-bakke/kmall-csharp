@@ -30,14 +30,13 @@ using (KmallReader r = new KmallReader(filePath))
 #### Reading datagrams of a specific type in a loop
 ```c#
 string filePath = @"C:\myKmallFiles\myKmallFile.kmall";
-string datagramType = KmallConstants.EM_DGM_M_RANGE_AND_DEPTH;
 
 using (FileStream fs = new FileStream(filePath))
 using (KmallReader r = new KmallReader(fs))
 {
   while (true)
   {
-    EMdgmMRZ dgm = r.ReadDatagram(datagramType) as EMdgmMRZ;
+    EMdgmMRZ dgm = r.ReadDatagram(KmallConstants.EM_DGM_M_RANGE_AND_DEPTH) as EMdgmMRZ;
     if (dgm is null) break; //End of file reached.
     
     /* do stuff here */
@@ -63,7 +62,6 @@ using (KmallWriter w = new KmallWriter(filePath, FileMode.Create))
 ```c#
 string readPath = @"C:\myKmallFiles\myKmallFile1.kmall";
 string writePath = @"C:\myKmallFiles\myKmallFile2.kmall";
-string datagramType = KmallConstants.EM_DGM_S_POSITION;
 
 File.Copy(readPath, writePath);
 
@@ -72,22 +70,22 @@ using (KmallWriter w = new KmallWriter(writePath, FileMode.Open))
 {
   while (true)
   {
-    EMdgmSPO dgm = r.ReadDatagram(datagramType) as EMdgmSPO;
+    EMdgmSPO dgm = r.ReadDatagram(KmallConstants.EM_DGM_S_POSITION) as EMdgmSPO;
     if (dgm is null) break; //End of file reached.
     
     /* modify datagram here */
     
     //Writes the datagram at the same position as it was read.
-    //This functionality is achieved by storing the datagram's file position in the EMdgm.DatagramPosition field.
+    //This functionality is achieved by storing the datagram's file position in the EMdgm.DatagramPosition field
     w.WriteDatagramAtDatagramPosition(dgm);
   }
 }
 ```
 
 #### Modifying specific datagrams in place
+Note that for this to work properly the datagrams may not grow in size during modification. Shrinking is fine.
 ```c#
 string filePath = @"C:\myKmallFiles\myKmallFile.kmall";
-string datagramType = KmallConstants.EM_DGM_S_CLOCK;
 
 using (FileStream fs = new FileStream(filePath, FileAccess.ReadWrite))
 using (KmallReader r = new KmallReader(fs))
@@ -95,14 +93,13 @@ using (KmallWriter w = new KmallWriter(fs))
 {
   while (true)
   {
-    EMdgmSCL dgm = r.ReadDatagram(datagramType) as EMdgmSCL;
+    EMdgmSCL dgm = r.ReadDatagram(KmallConstants.EM_DGM_S_CLOCK) as EMdgmSCL;
     if (dgm is null) break; //End of file reached.
     
     /* modify datagram here */
     
     //Writes the datagram at the same position as it was read.
     //This functionality is achieved by storing the datagram's file position in the EMdgm.DatagramPosition field.
-    //Note however that currently the datagram will overwrite parts of the next datagram if its length has increased.
     w.WriteDatagramAtDatagramPosition(dgm);
   }
 }
